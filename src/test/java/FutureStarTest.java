@@ -1,5 +1,5 @@
 import com.thoughtworks.firstProject.Calculator;
-import com.thoughtworks.firstProject.sorter;
+import com.thoughtworks.firstProject.Sorter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -22,14 +22,14 @@ public class FutureStarTest {
     public void should_return_sorted_map() throws Exception {
         List<String> letters = Arrays.asList("ynpan", "yzqi", "ybowang", "qiqzhao", "yibtan", "abc", "sjyuan");
 
-        assertThat(sorter.sortLetters(letters).values(), contains(3, 7, 6, 7, 6, 5, 4));
-        assertThat(sorter.sortLetters(letters).keySet(), contains("abc", "qiqzhao", "sjyuan", "ybowang", "yibtan", "ynpan", "yzqi"));
+        assertThat(Sorter.sortLetters(letters).values(), contains(3, 7, 6, 7, 6, 5, 4));
+        assertThat(Sorter.sortLetters(letters).keySet(), contains("abc", "qiqzhao", "sjyuan", "ybowang", "yibtan", "ynpan", "yzqi"));
     }
 
     @Test
     public void should_return_char_number_string() throws Exception {
         String letters = "aababbbcabcdabcde";
 
-        assertThat(sorter.countWordLengthAsc(letters), is("5(a) < 6(b) < 3(c) < 2(d) < 1(e)"));
+        assertThat(Sorter.countWordLengthAsc(letters), is("5(a) < 6(b) < 3(c) < 2(d) < 1(e)"));
     }
 }

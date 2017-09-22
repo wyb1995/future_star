@@ -3,7 +3,7 @@ package com.thoughtworks.firstProject;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class sorter {
+public class Sorter {
     public static Map<String, Integer> sortLetters(List<String> emailNames) {
         Collections.sort(emailNames);
 
