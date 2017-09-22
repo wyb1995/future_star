@@ -16,4 +16,8 @@ public class UserData {
     public Integer getAge() {
         return age;
     }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }

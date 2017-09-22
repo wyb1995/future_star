@@ -24,4 +24,19 @@ public class UsersController {
     public Collection<UserData> userList() {
         return userDataMap.values();
     }
+
+    @PutMapping(value = "/{id}/update", params = "age")
+    public String updateAge(@PathVariable("id") Integer id, @RequestParam("age") Integer age){
+
+        if (userDataMap.containsKey(id)) {
+            UserData userData = userDataMap.get(id);
+
+            userData.setAge(age);
+
+            userDataMap.replace(id, userData);
+
+            return "update you age to " + age;
+        }
+        return "update you age error";
+    }
 }
