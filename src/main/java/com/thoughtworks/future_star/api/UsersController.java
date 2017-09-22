@@ -1,10 +1,8 @@
 package com.thoughtworks.future_star.api;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -20,5 +18,10 @@ public class UsersController {
     public String create(@RequestBody UserData userData) {
         userDataMap.put((int) id.incrementAndGet(), userData);
         return "create success";
+    }
+
+    @GetMapping
+    public Collection<UserData> userList() {
+        return userDataMap.values();
     }
 }
