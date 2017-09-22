@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cal")
+@RequestMapping("/api")
 public class CalculatorController {
     @PostMapping("/evenSum")
     public Integer evenSum(@RequestBody List<Integer> list) {

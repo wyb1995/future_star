@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/string")
+@RequestMapping("/api")
 public class StringController {
-    @PostMapping("/length")
+    @PostMapping("/wordLength")
     public String countWordLengthAsc(@RequestBody String string) {
         return Sorter.countWordLengthAsc(string);
     }
