@@ -8,8 +8,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CalculatorController {
-    @GetMapping(value = "/evenSum", params = "list")
-    public Integer evenSum(@RequestParam("list") List<Integer> list) {
-        return Calculator.sumEvens(list);
+    @GetMapping(value = "/even-sum", params = "numbers")
+    public Integer evenSum(@RequestParam("numbers") List<Integer> numbers) {
+        return Calculator.sumEvens(numbers);
     }
 }

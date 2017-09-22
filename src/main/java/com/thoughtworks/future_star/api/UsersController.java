@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 public class UsersController {
 
-    static Map<Integer, UserData> userDataMap = new HashMap<>();
+    public static Map<Integer, UserData> userDataMap = new HashMap<>();
     private final AtomicLong id = new AtomicLong();
 
     @PostMapping
@@ -24,8 +24,8 @@ public class UsersController {
         return userDataMap.values();
     }
 
-    @PutMapping(value = "/{id}/update", params = "age")
-    public String updateAge(@PathVariable("id") Integer id, @RequestParam("age") Integer age){
+    @PutMapping(value = "/{id}/{age}")
+    public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
 
         if (userDataMap.containsKey(id)) {
             UserData userData = userDataMap.get(id);
