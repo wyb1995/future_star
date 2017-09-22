@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequestMapping("/api/users")
 public class UsersController {
 
-    public Map<Integer, UserData> userDataMap = new HashMap<>();
+    public static Map<Integer, UserData> userDataMap = new HashMap<>();
     private final AtomicLong id = new AtomicLong();
 
     @PostMapping
