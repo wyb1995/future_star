@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,5 +40,14 @@ public class UsersController {
             return "update you age to " + age;
         }
         return "update you age error";
+    }
+
+    @GetMapping(params = "age")
+    public List<UserData> findUserByAge(@RequestParam("age") Integer age) {
+        List<UserData> list = userDataMap.values().stream()
+                .filter(item -> item.getAge() == age)
+                .collect(Collectors.toList());
+
+        return list;
     }
 }
