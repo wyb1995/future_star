@@ -2,10 +2,7 @@ package com.thoughtworks.future_star.api;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -13,7 +10,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 public class UsersController {
 
-    public static Map<Integer, UserData> userDataMap = new HashMap<>();
+    static Map<Integer, UserData> userDataMap = new HashMap<>();
     private final AtomicLong id = new AtomicLong();
 
     @PostMapping
@@ -44,10 +41,9 @@ public class UsersController {
 
     @GetMapping(params = "age")
     public List<UserData> findUserByAge(@RequestParam("age") Integer age) {
-        List<UserData> list = userDataMap.values().stream()
-                .filter(item -> item.getAge() == age)
-                .collect(Collectors.toList());
 
-        return list;
+        return userDataMap.values().stream()
+                .filter(item -> Objects.equals(item.getAge(), age))
+                .collect(Collectors.toList());
     }
 }
