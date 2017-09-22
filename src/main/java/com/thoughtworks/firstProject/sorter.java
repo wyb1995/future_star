@@ -1,8 +1,10 @@
+package com.thoughtworks.firstProject;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class sorter {
-    static Map<String, Integer> sortLetters(List<String> emailNames) {
+    public static Map<String, Integer> sortLetters(List<String> emailNames) {
         Collections.sort(emailNames);
 
         Map<String, Integer> output = new LinkedHashMap<>();
@@ -11,7 +13,7 @@ public class sorter {
         return output;
     }
 
-    static String countWordLengthAsc(String emailNames) {
+    public static String countWordLengthAsc(String emailNames) {
         Map<String, Integer> map = new HashMap<>();
         Arrays.stream(emailNames.split(""))
                 .forEach(item -> {

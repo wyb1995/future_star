@@ -1,3 +1,5 @@
+import com.thoughtworks.firstProject.Calculator;
+import com.thoughtworks.firstProject.sorter;
 import org.junit.Test;
 
 import java.util.Arrays;
