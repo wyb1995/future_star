@@ -26,19 +26,10 @@ public class UsersController {
         return userService.getUserList();
     }
 
-    @PutMapping(value = "/{id}/{age}")
+    @PutMapping(value = "/{id}/age/{age}")
     public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
-
-        if (UserService.userDataMap.containsKey(id)) {
-            UserConfigDTO userConfigDTO = UserService.userDataMap.get(id);
-
-            userConfigDTO.setAge(age);
-
-            UserService.userDataMap.replace(id, userConfigDTO);
-
-            return "update you age to " + age;
-        }
-        return "update you age error";
+        String userInfo = userService.updateUserAgeById(id, age);
+        return userInfo != null ? "you info: " + userInfo : "update you info error";
     }
 
     @GetMapping(params = "age")

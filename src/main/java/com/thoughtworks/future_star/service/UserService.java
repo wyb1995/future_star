@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -23,5 +22,18 @@ public class UserService {
 
     public List<UserConfigDTO> getUserList() {
         return new ArrayList<>(userDataMap.values());
+    }
+
+    public String updateUserAgeById(Integer id, Integer age) {
+        if(userDataMap.containsKey(id)){
+            UserConfigDTO userConfigDTO = userDataMap.get(id);
+
+            userConfigDTO.setAge(age);
+
+            userDataMap.replace(id, userConfigDTO);
+
+            return userDataMap.get(id).toString();
+        }
+        return null;
     }
 }
