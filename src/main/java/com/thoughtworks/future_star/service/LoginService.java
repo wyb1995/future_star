@@ -1,7 +1,6 @@
 package com.thoughtworks.future_star.service;
 
 import com.thoughtworks.future_star.dto.UserConfigDTO;
-import com.thoughtworks.future_star.api.UsersController;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class LoginService {
-    Map<Integer, UserConfigDTO> userDataMap = UsersController.userDataMap;
+    Map<Integer, UserConfigDTO> userDataMap = UserService.userDataMap;
 
     public Boolean login(UserConfigDTO loginData) {
         List<UserConfigDTO> list = userDataMap.values().stream()
