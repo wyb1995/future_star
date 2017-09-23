@@ -3,6 +3,7 @@ package com.thoughtworks.future_star.api;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
 import com.thoughtworks.future_star.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -15,6 +16,7 @@ public class UsersController {
     private UserService userService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody UserConfigDTO userConfigDTO) {
         boolean isCreated = userService.createAccount(userConfigDTO);
         return isCreated ? "create success" : "create error";
