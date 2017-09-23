@@ -1,5 +1,7 @@
 package com.thoughtworks.future_star.api;
 
+import com.thoughtworks.future_star.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +15,11 @@ import java.util.stream.Stream;
 @RestController
 @RequestMapping("/api/login")
 public class LoginController {
+    @Autowired
+    private LoginService loginService;
+
     @PostMapping
     public String login(@RequestBody UserData loginData){
-        Map<Integer, UserData> userDataMap = UsersController.userDataMap;
-        List<UserData> list = userDataMap.values().stream()
-                .filter(item -> item.getPassword().equals(loginData.getPassword()) && item.getUsername().equals(loginData.getUsername()))
-                .collect(Collectors.toList());
-
-        return list.isEmpty() ? "login error" : "{" + loginData.getUsername() + "} login successful";
+        return loginService.login(loginData)? "login error" : "{" + loginData.getUsername() + "} login successful";
     }
 }
