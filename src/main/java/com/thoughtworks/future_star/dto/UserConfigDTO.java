@@ -1,6 +1,6 @@
-package com.thoughtworks.future_star.api;
+package com.thoughtworks.future_star.dto;
 
-public class UserData {
+public class UserConfigDTO {
     private String username;
     private String password;
     private Integer age;

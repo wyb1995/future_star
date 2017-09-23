@@ -1,5 +1,6 @@
 package com.thoughtworks.future_star.api;
 
+import com.thoughtworks.future_star.dto.UserConfigDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -10,17 +11,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 public class UsersController {
 
-    public static Map<Integer, UserData> userDataMap = new HashMap<>();
+    public static Map<Integer, UserConfigDTO> userDataMap = new HashMap<>();
     private final AtomicLong id = new AtomicLong();
 
     @PostMapping
-    public String create(@RequestBody UserData userData) {
-        userDataMap.put((int) id.incrementAndGet(), userData);
+    public String create(@RequestBody UserConfigDTO userConfigDTO) {
+        userDataMap.put((int) id.incrementAndGet(), userConfigDTO);
         return "create success";
     }
 
     @GetMapping
-    public Collection<UserData> userList() {
+    public Collection<UserConfigDTO> userList() {
         return userDataMap.values();
     }
 
@@ -28,11 +29,11 @@ public class UsersController {
     public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
 
         if (userDataMap.containsKey(id)) {
-            UserData userData = userDataMap.get(id);
+            UserConfigDTO userConfigDTO = userDataMap.get(id);
 
-            userData.setAge(age);
+            userConfigDTO.setAge(age);
 
-            userDataMap.replace(id, userData);
+            userDataMap.replace(id, userConfigDTO);
 
             return "update you age to " + age;
         }
@@ -40,7 +41,7 @@ public class UsersController {
     }
 
     @GetMapping(params = "age")
-    public List<UserData> findUserByAge(@RequestParam("age") Integer age) {
+    public List<UserConfigDTO> findUserByAge(@RequestParam("age") Integer age) {
 
         return userDataMap.values().stream()
                 .filter(item -> Objects.equals(item.getAge(), age))
