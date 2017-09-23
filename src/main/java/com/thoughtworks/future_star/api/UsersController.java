@@ -34,9 +34,6 @@ public class UsersController {
 
     @GetMapping(params = "age")
     public List<UserConfigDTO> findUserByAge(@RequestParam("age") Integer age) {
-
-        return UserService.userDataMap.values().stream()
-                .filter(item -> Objects.equals(item.getAge(), age))
-                .collect(Collectors.toList());
+        return userService.findUserByAge(age);
     }
 }

@@ -3,11 +3,9 @@ package com.thoughtworks.future_star.service;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -35,5 +33,11 @@ public class UserService {
             return userDataMap.get(id).toString();
         }
         return null;
+    }
+
+    public List<UserConfigDTO> findUserByAge(Integer age) {
+        return UserService.userDataMap.values().stream()
+                .filter(item -> Objects.equals(item.getAge(), age))
+                .collect(Collectors.toList());
     }
 }
