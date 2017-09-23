@@ -23,7 +23,7 @@ public class UsersController {
 
     @GetMapping
     public Collection<UserConfigDTO> userList() {
-        return UserService.userDataMap.values();
+        return userService.getUserList();
     }
 
     @PutMapping(value = "/{id}/{age}")
