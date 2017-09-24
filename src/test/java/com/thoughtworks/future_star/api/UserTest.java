@@ -2,7 +2,6 @@ package com.thoughtworks.future_star.api;
 
 import com.thoughtworks.Application;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
-import com.thoughtworks.future_star.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -24,7 +22,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class LoginTest {
+public class UserTest {
     
     private MockMvc mockMvc;
 
@@ -35,16 +33,17 @@ public class LoginTest {
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
+
     }
 
     @Test
-    void should_return_login_success() throws Exception {
+    void should_return_create_user_success() throws Exception {
         UserConfigDTO userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
-        UserService.userDataMap.put(1, userConfigDTO);
-        mockMvc.perform(post("/api/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(StringUtils.writeObjectAsJsonString(userConfigDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", is("username login successfully.")));
+        StringUtils.writeObjectAsJsonString(userConfigDTO);
+        mockMvc.perform(post("/api/users")
+                .content(StringUtils.writeObjectAsJsonString(userConfigDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$", is("create success")));
     }
 }
