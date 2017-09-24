@@ -40,6 +40,11 @@ public class UserTest {
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
         userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
+        UserService.userDataMap.put(1, userConfigDTO);
+        userConfigDTO = UserConfigDTO.builder().age(16).username("username1").password("password").build();
+        UserService.userDataMap.put(2, userConfigDTO);
+        userConfigDTO = UserConfigDTO.builder().age(15).username("username2").password("password").build();
+        UserService.userDataMap.put(3, userConfigDTO);
     }
 
     @Test
@@ -55,7 +60,6 @@ public class UserTest {
 
     @Test
     void should_return_create_user_error() throws Exception {
-        UserService.userDataMap.put(1, userConfigDTO);
         mockMvc.perform(post("/api/users")
                 .content(StringUtils.writeObjectAsJsonString(userConfigDTO))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -64,16 +68,14 @@ public class UserTest {
 
     @Test
     void should_return_user_list() throws Exception{
-        UserService.userDataMap.put(1, userConfigDTO);
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].username", is("username")));
     }
 
     @Test
     void should_return_update_user_age_success() throws Exception{
-        UserService.userDataMap.put(1, userConfigDTO);
         mockMvc.perform(put("/api/users/1/age/123"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is("update you info success")));
@@ -81,7 +83,16 @@ public class UserTest {
 
     @Test
     void should_return_update_user_age_error() throws Exception{
+        UserService.userDataMap.clear();
         mockMvc.perform(put("/api/users/1/age/123"))
                 .andExpect(jsonPath("$", is("update you info error")));
+    }
+
+    @Test
+    void should_return_age_is_15_user_list() throws Exception{
+        mockMvc.perform(get("/api/users?age=15"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].age", is(15)));
     }
 }
