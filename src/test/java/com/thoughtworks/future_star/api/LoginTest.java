@@ -1,6 +1,7 @@
 package com.thoughtworks.future_star.api;
 
 import com.thoughtworks.Application;
+import com.thoughtworks.future_star.dto.LoginDataDTO;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
 import com.thoughtworks.future_star.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,25 +36,26 @@ public class LoginTest {
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
+        UserConfigDTO userConfigDTO = UserConfigDTO.builder().username("username").password("password").age(15).build();
+        UserService.userDataMap.put(1, userConfigDTO);
     }
 
     @Test
     void should_return_login_success() throws Exception {
-        UserConfigDTO userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
-        UserService.userDataMap.put(1, userConfigDTO);
+        LoginDataDTO loginDataDTO = LoginDataDTO.builder().username("username").password("password").build();
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StringUtils.writeObjectAsJsonString(userConfigDTO)))
+                .content(StringUtils.writeObjectAsJsonString(loginDataDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is("username login successfully.")));
     }
 
     @Test
     void should_return_login_error() throws Exception{
-        UserConfigDTO userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
+        LoginDataDTO loginDataDTO = LoginDataDTO.builder().username("username").password("error_password").build();
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(StringUtils.writeObjectAsJsonString(userConfigDTO)))
+                .content(StringUtils.writeObjectAsJsonString(loginDataDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is("login error")));
     }

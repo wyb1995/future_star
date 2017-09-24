@@ -1,5 +1,6 @@
 package com.thoughtworks.future_star.api;
 
+import com.thoughtworks.future_star.dto.LoginDataDTO;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
 import com.thoughtworks.future_star.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping
-    public String login(@RequestBody UserConfigDTO loginData){
+    public String login(@RequestBody LoginDataDTO loginData){
         return loginService.login(loginData)? "login error" : String.join(" ", loginData.getUsername(), "login successfully.");
     }
 }

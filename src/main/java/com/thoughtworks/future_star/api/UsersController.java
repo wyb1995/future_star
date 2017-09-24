@@ -19,7 +19,6 @@ public class UsersController {
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody UserConfigDTO userConfigDTO) {
         boolean isCreated = userService.createAccount(userConfigDTO);
-        System.out.println(isCreated ? "create success" : "create error");
         return isCreated ? "create success" : "create error";
     }
 
