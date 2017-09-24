@@ -2,6 +2,7 @@ package com.thoughtworks.future_star.api;
 
 import com.thoughtworks.Application;
 import com.thoughtworks.future_star.dto.UserConfigDTO;
+import com.thoughtworks.future_star.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,27 +24,38 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 public class UserTest {
-    
+
     private MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    private UserConfigDTO userConfigDTO;
+
 
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-
+        userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
     }
 
     @Test
     void should_return_create_user_success() throws Exception {
-        UserConfigDTO userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
+        UserService.userDataMap.clear();
         StringUtils.writeObjectAsJsonString(userConfigDTO);
         mockMvc.perform(post("/api/users")
                 .content(StringUtils.writeObjectAsJsonString(userConfigDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$", is("create success")));
+    }
+
+    @Test
+    void should_return_create_user_error() throws Exception {
+        UserService.userDataMap.put(1, userConfigDTO);
+        mockMvc.perform(post("/api/users")
+                .content(StringUtils.writeObjectAsJsonString(userConfigDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", is("create error")));
     }
 }

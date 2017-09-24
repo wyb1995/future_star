@@ -14,8 +14,13 @@ public class UserService {
 
     public boolean createAccount(UserConfigDTO userConfigDTO) {
         int userId = (int) id.incrementAndGet();
-        userDataMap.put(userId, userConfigDTO);
-        return userDataMap.containsKey(userId);
+        List<UserConfigDTO> list = userDataMap.values().stream()
+                .filter(item -> item.getUsername().equals(userConfigDTO.getUsername()))
+                .collect(Collectors.toList());
+        if (list.isEmpty()) {
+            userDataMap.put(userId, userConfigDTO);
+        }
+        return list.isEmpty();
     }
 
     public List<UserConfigDTO> getUserList() {
