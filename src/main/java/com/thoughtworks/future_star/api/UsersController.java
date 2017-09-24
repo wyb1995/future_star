@@ -31,7 +31,7 @@ public class UsersController {
     @PutMapping(value = "/{id}/age/{age}")
     public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
         String userInfo = userService.updateUserAgeById(id, age);
-        return userInfo != null ? "you info: " + userInfo : "update you info error";
+        return userInfo != null ? "update you info success" : "update you info error";
     }
 
     @GetMapping(params = "age")

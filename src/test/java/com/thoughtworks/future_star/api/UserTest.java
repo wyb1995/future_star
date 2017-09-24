@@ -14,8 +14,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -57,5 +60,28 @@ public class UserTest {
                 .content(StringUtils.writeObjectAsJsonString(userConfigDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", is("create error")));
+    }
+
+    @Test
+    void should_return_user_list() throws Exception{
+        UserService.userDataMap.put(1, userConfigDTO);
+        mockMvc.perform(get("/api/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].username", is("username")));
+    }
+
+    @Test
+    void should_return_update_user_age_success() throws Exception{
+        UserService.userDataMap.put(1, userConfigDTO);
+        mockMvc.perform(put("/api/users/1/age/123"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is("update you info success")));
+    }
+
+    @Test
+    void should_return_update_user_age_error() throws Exception{
+        mockMvc.perform(put("/api/users/1/age/123"))
+                .andExpect(jsonPath("$", is("update you info error")));
     }
 }
