@@ -47,4 +47,14 @@ public class LoginTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is("username login successfully.")));
     }
+
+    @Test
+    void should_return_login_error() throws Exception{
+        UserConfigDTO userConfigDTO = UserConfigDTO.builder().age(15).username("username").password("password").build();
+        mockMvc.perform(post("/api/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(StringUtils.writeObjectAsJsonString(userConfigDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is("login error")));
+    }
 }
