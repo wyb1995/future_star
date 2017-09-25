@@ -1,4 +1,4 @@
-package com.thoughtworks.future_star.api;
+package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.firstProject.Sorter;
 import org.springframework.web.bind.annotation.GetMapping;

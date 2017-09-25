@@ -1,4 +1,4 @@
-package com.thoughtworks.future_star.dto;
+package com.thoughtworks.futurestar.dto;
 
 import lombok.Builder;
 import lombok.Getter;

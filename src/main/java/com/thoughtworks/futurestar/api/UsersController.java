@@ -1,7 +1,7 @@
-package com.thoughtworks.future_star.api;
+package com.thoughtworks.futurestar.api;
 
-import com.thoughtworks.future_star.dto.UserConfigDTO;
-import com.thoughtworks.future_star.service.UserService;
+import com.thoughtworks.futurestar.dto.UserConfigDTO;
+import com.thoughtworks.futurestar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
-package com.thoughtworks.future_star.api;
+package com.thoughtworks.futurestar.api;
 
-import com.thoughtworks.future_star.dto.LoginDataDTO;
-import com.thoughtworks.future_star.service.LoginService;
+import com.thoughtworks.futurestar.dto.LoginDataDTO;
+import com.thoughtworks.futurestar.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,6 +1,6 @@
-package com.thoughtworks.future_star.service;
+package com.thoughtworks.futurestar.service;
 
-import com.thoughtworks.future_star.dto.UserConfigDTO;
+import com.thoughtworks.futurestar.dto.UserConfigDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

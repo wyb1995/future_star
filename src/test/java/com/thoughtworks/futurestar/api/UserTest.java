@@ -1,8 +1,8 @@
-package com.thoughtworks.future_star.api;
+package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
-import com.thoughtworks.future_star.dto.UserConfigDTO;
-import com.thoughtworks.future_star.service.UserService;
+import com.thoughtworks.futurestar.dto.UserConfigDTO;
+import com.thoughtworks.futurestar.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
