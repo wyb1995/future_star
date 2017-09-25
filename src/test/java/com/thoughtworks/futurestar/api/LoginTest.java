@@ -2,7 +2,7 @@ package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
 import com.thoughtworks.futurestar.dto.LoginDataDTO;
-import com.thoughtworks.futurestar.dto.User;
+import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

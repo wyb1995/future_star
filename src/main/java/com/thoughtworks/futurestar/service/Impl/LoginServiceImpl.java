@@ -1,6 +1,6 @@
 package com.thoughtworks.futurestar.service.Impl;
 
-import com.thoughtworks.futurestar.dto.User;
+import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.repository.UserRepository;
 import com.thoughtworks.futurestar.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

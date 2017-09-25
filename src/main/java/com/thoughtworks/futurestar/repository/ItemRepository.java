@@ -1,10 +1,9 @@
 package com.thoughtworks.futurestar.repository;
 
-import com.thoughtworks.futurestar.entity.User;
+import com.thoughtworks.futurestar.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String>{
-    User findUserByUsername(String username);
+public interface ItemRepository extends JpaRepository<Item, String> {
 }

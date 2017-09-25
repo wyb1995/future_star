@@ -1,7 +1,7 @@
 package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
-import com.thoughtworks.futurestar.dto.User;
+import com.thoughtworks.futurestar.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

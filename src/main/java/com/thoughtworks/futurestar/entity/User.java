@@ -1,4 +1,4 @@
-package com.thoughtworks.futurestar.dto;
+package com.thoughtworks.futurestar.entity;
 
 import lombok.*;
 
