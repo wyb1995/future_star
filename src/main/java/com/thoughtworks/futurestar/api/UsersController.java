@@ -1,7 +1,8 @@
 package com.thoughtworks.futurestar.api;
 
-import com.thoughtworks.futurestar.dto.UserConfigDTO;
+import com.thoughtworks.futurestar.dto.User;
 import com.thoughtworks.futurestar.service.UserService;
+import com.thoughtworks.futurestar.service.UserService1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +15,31 @@ import java.util.List;
 public class UsersController {
 
     @Autowired
-    private UserService userService;
+    private UserService userServiceImpl;
+
+    @Autowired
+    private UserService1 userService1;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody UserConfigDTO userConfigDTO) {
-        boolean isCreated = userService.createAccount(userConfigDTO);
-        return isCreated ? "create success" : "create error";
+    public String create(@RequestBody User user) {
+        userServiceImpl.createAccount(user);
+        return user.getUsername() + " create successful.";
     }
 
     @GetMapping
-    public Collection<UserConfigDTO> userList() {
-        return userService.getUserList();
+    public Collection<User> userList() {
+        return userService1.getUserList();
     }
 
     @PutMapping(value = "/{id}/age/{age}")
     public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
-        String userInfo = userService.updateUserAgeById(id, age);
+        String userInfo = userService1.updateUserAgeById(id, age);
         return userInfo != null ? "update you info success" : "update you info error";
     }
 
     @GetMapping(params = "age")
-    public List<UserConfigDTO> findUserByAge(@RequestParam("age") Integer age) {
-        return userService.findUserByAge(age);
+    public List<User> findUserByAge(@RequestParam("age") Integer age) {
+        return userService1.findUserByAge(age);
     }
 }

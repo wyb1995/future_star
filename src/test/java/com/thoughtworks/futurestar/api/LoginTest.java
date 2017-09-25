@@ -2,8 +2,8 @@ package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
 import com.thoughtworks.futurestar.dto.LoginDataDTO;
-import com.thoughtworks.futurestar.dto.UserConfigDTO;
-import com.thoughtworks.futurestar.service.UserService;
+import com.thoughtworks.futurestar.dto.User;
+import com.thoughtworks.futurestar.service.UserService1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,8 +35,8 @@ public class LoginTest {
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-        UserConfigDTO userConfigDTO = UserConfigDTO.builder().username("username").password("password").age(15).build();
-        UserService.userDataMap.put(1, userConfigDTO);
+        User user = User.builder().username("username").password("password").age(15).build();
+        UserService1.userDataMap.put(1, user);
     }
 
     @Test
