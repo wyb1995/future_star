@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/login")
 public class LoginController {
     @Autowired
-    private LoginService loginService;
+    private LoginService loginServiceImpl;
 
     @PostMapping
     public String login(@RequestBody LoginDataDTO loginData){
-        return loginService.login(loginData)? "login error" : String.join(" ", loginData.getUsername(), "login successfully.");
+        return loginServiceImpl.isValid(loginData.getUsername(), loginData.getPassword())? String.join(" ", loginData.getUsername(), "login successfully.") : "login error";
     }
 }

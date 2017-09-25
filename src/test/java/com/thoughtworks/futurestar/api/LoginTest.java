@@ -3,6 +3,7 @@ package com.thoughtworks.futurestar.api;
 import com.thoughtworks.Application;
 import com.thoughtworks.futurestar.dto.LoginDataDTO;
 import com.thoughtworks.futurestar.dto.User;
+import com.thoughtworks.futurestar.repository.UserRepository;
 import com.thoughtworks.futurestar.service.UserService1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.transaction.Transactional;
+
+import java.util.UUID;
+
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,19 +29,21 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
+@Transactional
 public class LoginTest {
     
     private MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
-
+    @Autowired
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
-        User user = User.builder().username("username").password("password").age(15).build();
-        UserService1.userDataMap.put(1, user);
+        User user = User.builder().id(UUID.randomUUID().toString()).username("username").password("password").age(15).build();
+        userRepository.save(user);
     }
 
     @Test
