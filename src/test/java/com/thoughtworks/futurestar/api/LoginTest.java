@@ -4,7 +4,6 @@ import com.thoughtworks.Application;
 import com.thoughtworks.futurestar.dto.LoginDataDTO;
 import com.thoughtworks.futurestar.dto.User;
 import com.thoughtworks.futurestar.repository.UserRepository;
-import com.thoughtworks.futurestar.service.UserService1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

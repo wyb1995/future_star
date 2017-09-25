@@ -2,7 +2,6 @@ package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
 import com.thoughtworks.futurestar.dto.User;
-import com.thoughtworks.futurestar.service.UserService1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -44,11 +43,6 @@ public class UserTest {
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
         user = User.builder().age(15).username("username").password("password").build();
-//        UserService1.userDataMap.put(1, user);
-//        user = User.builder().age(16).username("username1").password("password").build();
-//        UserService1.userDataMap.put(2, user);
-//        user = User.builder().age(15).username("username2").password("password").build();
-//        UserService1.userDataMap.put(3, user);
     }
 
     @Test
@@ -81,7 +75,7 @@ public class UserTest {
     @Test
     @Disabled
     void should_return_update_user_age_error() throws Exception{
-        UserService1.userDataMap.clear();
+//        UserService1.userDataMap.clear();
         mockMvc.perform(put("/api/users/1/age/123"))
                 .andExpect(jsonPath("$", is("update you info error")));
     }
