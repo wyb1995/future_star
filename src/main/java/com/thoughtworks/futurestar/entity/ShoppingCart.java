@@ -1,7 +1,5 @@
 package com.thoughtworks.futurestar.entity;
 
-import com.thoughtworks.futurestar.entity.Item;
-import com.thoughtworks.futurestar.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
