@@ -3,6 +3,7 @@ package com.thoughtworks.futurestar.api;
 import com.thoughtworks.futurestar.dto.AddressDTO;
 import com.thoughtworks.futurestar.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class AddressController {
     private AddressService addressServiceImpl;
 
     @PostMapping("/{user_id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void createAddress(@RequestBody AddressDTO addressDTO, @PathVariable String user_id) {
         addressServiceImpl.createAddress(addressDTO, user_id);
     }

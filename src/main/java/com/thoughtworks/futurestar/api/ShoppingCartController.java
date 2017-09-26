@@ -3,6 +3,7 @@ package com.thoughtworks.futurestar.api;
 import com.thoughtworks.futurestar.entity.Item;
 import com.thoughtworks.futurestar.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/{user_id}/{item_id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Item> addItemToShoppingCart(@PathVariable String user_id, @PathVariable String item_id) {
         return shoppingCartServiceImpl.addItemToShoppingCart(user_id, item_id);
     }
