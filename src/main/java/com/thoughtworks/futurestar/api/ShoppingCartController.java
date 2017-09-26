@@ -16,7 +16,8 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartServiceImpl;
 
-    private SessionCache sessionCache = new SessionCache();
+    @Autowired
+    private SessionCache sessionCache;
 
     @GetMapping
     public List<Item> getItemList() {

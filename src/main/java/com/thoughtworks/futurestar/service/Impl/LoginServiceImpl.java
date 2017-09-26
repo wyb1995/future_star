@@ -13,12 +13,17 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    private SessionCache sessionCache = new SessionCache();
+    @Autowired
+    private SessionCache sessionCache;
 
     @Override
     public boolean isValid(String username, String password) {
         User user = userRepository.findUserByUsername(username);
-        sessionCache.setUser(user);
-        return user.getPassword().equals(password);
+        if (user.getPassword().equals(password)) {
+            sessionCache.setUser(user);
+            return true;
+        }
+
+        return false;
     }
 }

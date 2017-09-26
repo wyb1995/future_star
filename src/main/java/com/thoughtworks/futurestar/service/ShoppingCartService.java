@@ -8,4 +8,6 @@ public interface ShoppingCartService {
     List<Item> getShoppingCart(String user_id);
 
     List<Item> addItemToShoppingCart(String user_id, String item_id);
+
+    void deleteItemWithShoppingCart(String user_id, List<String> itemIds);
 }

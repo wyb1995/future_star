@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -69,5 +71,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setItemList(items);
         shoppingCartRepository.save(shoppingCart);
         return items;
+    }
+
+    @Override
+    public void deleteItemWithShoppingCart(String user_id, List<String> itemIds) {
+        User user = userRepository.findOne(user_id);
+        if (user == null) {
+            throw new InvalidCredentialException("no login");
+        }
+        ShoppingCart shoppingCart = shoppingCartRepository.findAllByUser_id(user_id);
+        List<Item> items = shoppingCart.getItemList().stream()
+                .filter(item -> !itemIds.contains(item.getId())).collect(Collectors.toList());
+        shoppingCart.setItemList(items);
+        shoppingCartRepository.save(shoppingCart);
     }
 }

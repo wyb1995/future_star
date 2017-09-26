@@ -1,6 +1,7 @@
 package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.Application;
+import com.thoughtworks.futurestar.cache.SessionCache;
 import com.thoughtworks.futurestar.entity.Item;
 import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.repository.ItemRepository;
@@ -43,8 +44,6 @@ public class ShoppingCartTest {
 
     private Item item;
 
-    private User user;
-
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
@@ -54,22 +53,26 @@ public class ShoppingCartTest {
 
         itemRepository.save(item);
 
-        user = User.builder().id(UUID.randomUUID().toString()).
+        User user = User.builder().id(UUID.randomUUID().toString()).
                 username("username").password("password").age(20).build();
 
         userRepository.save(user);
+
+        SessionCache sessionCache = new SessionCache();
+
+        sessionCache.setUser(userRepository.save(user));
     }
 
     @Test
     void should_return_empty_shopping_cart() throws Exception {
-        mockMvc.perform(get("/api/shopping-cart/" + user.getId()))
+        mockMvc.perform(get("/api/shopping-cart"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
     @Test
     void should_add_item_to_cart() throws Exception {
-        mockMvc.perform(post("/api/shopping-cart/" + user.getId() + "/" + item.getId()))
+        mockMvc.perform(post("/api/shopping-cart/" + item.getId()))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$", hasSize(1)));
     }

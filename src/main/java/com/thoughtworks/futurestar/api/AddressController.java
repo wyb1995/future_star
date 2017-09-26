@@ -17,7 +17,8 @@ public class AddressController {
     @Autowired
     private AddressService addressServiceImpl;
 
-    private SessionCache sessionCache = new SessionCache();
+    @Autowired
+    private SessionCache sessionCache;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

@@ -3,9 +3,11 @@ package com.thoughtworks.futurestar.cache;
 import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SessionCache {
-    private User user;
+    private static User user;
 
     @Autowired
     private UserRepository userRepository;
