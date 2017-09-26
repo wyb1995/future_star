@@ -16,9 +16,9 @@ public class LoginController {
     private LoginService loginServiceImpl;
 
     @PostMapping
-    public String login(@RequestBody LoginDataDTO loginData){
+    public String login(@RequestBody LoginDataDTO loginData) {
         if (loginServiceImpl.isValid(loginData.getUsername(), loginData.getPassword())) {
-return String.join(" ", loginData.getUsername(), "login successfully.");
+            return String.join(" ", loginData.getUsername(), "login successfully.");
         }
         throw new InvalidCredentialException("login error");
     }

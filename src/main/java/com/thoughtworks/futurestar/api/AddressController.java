@@ -1,7 +1,9 @@
 package com.thoughtworks.futurestar.api;
 
+import com.thoughtworks.futurestar.cache.SessionCache;
 import com.thoughtworks.futurestar.dto.AddressDTO;
 import com.thoughtworks.futurestar.entity.Address;
+import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +17,18 @@ public class AddressController {
     @Autowired
     private AddressService addressServiceImpl;
 
-    @PostMapping("/{user_id}")
+    private SessionCache sessionCache = new SessionCache();
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createAddress(@RequestBody AddressDTO addressDTO, @PathVariable String user_id) {
-        addressServiceImpl.createAddress(addressDTO, user_id);
+    public void createAddress(@RequestBody AddressDTO addressDTO) {
+        User user = sessionCache.loadCurrentUser();
+        addressServiceImpl.createAddress(addressDTO, user.getId());
     }
 
-    @GetMapping("/{user_id}")
-    public List<Address> getAddressList(@PathVariable String user_id) {
-        return addressServiceImpl.getAddressList(user_id);
+    @GetMapping
+    public List<Address> getAddressList() {
+        User user = sessionCache.loadCurrentUser();
+        return addressServiceImpl.getAddressList(user.getId());
     }
 }

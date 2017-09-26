@@ -1,6 +1,8 @@
 package com.thoughtworks.futurestar.api;
 
+import com.thoughtworks.futurestar.cache.SessionCache;
 import com.thoughtworks.futurestar.entity.Item;
+import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +16,18 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartServiceImpl;
 
-    @GetMapping("/{user_id}")
-    public List<Item> getItemList(@PathVariable String user_id) {
-        return shoppingCartServiceImpl.getShoppingCart(user_id);
+    private SessionCache sessionCache = new SessionCache();
+
+    @GetMapping
+    public List<Item> getItemList() {
+        User user = sessionCache.loadCurrentUser();
+        return shoppingCartServiceImpl.getShoppingCart(user.getId());
     }
 
-    @PostMapping("/{user_id}/{item_id}")
+    @PostMapping("/{item_id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Item> addItemToShoppingCart(@PathVariable String user_id, @PathVariable String item_id) {
-        return shoppingCartServiceImpl.addItemToShoppingCart(user_id, item_id);
+    public List<Item> addItemToShoppingCart(@PathVariable String item_id) {
+        User user = sessionCache.loadCurrentUser();
+        return shoppingCartServiceImpl.addItemToShoppingCart(user.getId(), item_id);
     }
 }
