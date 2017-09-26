@@ -28,4 +28,11 @@ public class OrderServiceImpl implements OrderService {
 
         return orderRepository.save(order);
     }
+
+    @Override
+    public Order getOrder(User user, String order_id) {
+        Order order = orderRepository.findOne(order_id);
+
+        return order;
+    }
 }

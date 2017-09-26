@@ -38,4 +38,10 @@ public class OrderController {
         }
         return order;
     }
+
+    @GetMapping("/{order_id}")
+    public Order getOrder(@PathVariable String order_id) {
+        User user = sessionCache.loadCurrentUser();
+        return orderServiceImpl.getOrder(user, order_id);
+    }
 }
