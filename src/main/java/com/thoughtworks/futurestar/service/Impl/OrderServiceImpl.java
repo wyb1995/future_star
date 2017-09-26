@@ -22,9 +22,9 @@ public class OrderServiceImpl implements OrderService {
     private ItemRepository itemRepository;
 
     @Override
-    public Order createOrder(User user, List<String> itemIds) {
+    public Order createOrder(User user, List<String> itemIds, String address) {
         List<Item> item = itemRepository.findAll(itemIds);
-        Order order = Order.builder().id(UUID.randomUUID().toString()).user(user).itemList(item).build();
+        Order order = Order.builder().id(UUID.randomUUID().toString()).user(user).address(address).itemList(item).build();
 
         return orderRepository.save(order);
     }

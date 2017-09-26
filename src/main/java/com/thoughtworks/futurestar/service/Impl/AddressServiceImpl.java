@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     public void createAddress(AddressDTO addressDTO, String user_id) {
         User user = userRepository.findOne(user_id);
         if (user == null) {
-            throw new InvalidCredentialException("no login");
+            throw new InvalidCredentialException("not login");
         }
 
         Address address = Address.builder().id(UUID.randomUUID().toString()).address(addressDTO.getAddress()).build();

@@ -6,7 +6,7 @@ import com.thoughtworks.futurestar.entity.User;
 import java.util.List;
 
 public interface OrderService {
-    Order createOrder(User user, List<String> itemIds);
+    Order createOrder(User user, List<String> itemIds, String address);
 
     Order getOrder(User user, String order_id);
 }

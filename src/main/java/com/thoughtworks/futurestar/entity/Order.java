@@ -17,6 +17,8 @@ public class Order {
     @Id
     private String id;
 
+    private String address;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

@@ -28,9 +28,9 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public Order createOrder(@RequestBody OrderDTO orderDTO) {
         User user = sessionCache.loadCurrentUser();
+        String address = orderDTO.getAddress();
         List<String> itemIds = orderDTO.getItemIds();
-        System.out.println(itemIds);
-        Order order = orderServiceImpl.createOrder(user, itemIds);
+        Order order = orderServiceImpl.createOrder(user, itemIds, address);
         if (order != null) {
             shoppingCartServiceImpl.deleteItemWithShoppingCart(user.getId(), itemIds);
         }

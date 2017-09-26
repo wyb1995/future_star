@@ -10,5 +10,6 @@ import java.util.List;
 @Setter
 @Builder
 public class OrderDTO {
+    private String address;
     private List<String> itemIds;
 }
