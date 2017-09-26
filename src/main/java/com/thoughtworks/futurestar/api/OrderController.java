@@ -3,13 +3,11 @@ package com.thoughtworks.futurestar.api;
 import com.thoughtworks.futurestar.cache.SessionCache;
 import com.thoughtworks.futurestar.dto.OrderDTO;
 import com.thoughtworks.futurestar.entity.Order;
-import com.thoughtworks.futurestar.entity.ShoppingCart;
 import com.thoughtworks.futurestar.entity.User;
 import com.thoughtworks.futurestar.service.OrderService;
 import com.thoughtworks.futurestar.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
