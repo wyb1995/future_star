@@ -61,7 +61,7 @@ public class LoginTest {
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(StringUtils.writeObjectAsJsonString(loginDataDTO)))
-                .andExpect(status().isOk())
+                .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$", is("login error")));
     }
 }

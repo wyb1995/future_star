@@ -1,6 +1,7 @@
 package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.futurestar.dto.LoginDataDTO;
+import com.thoughtworks.futurestar.exception.InvalidCredentialException;
 import com.thoughtworks.futurestar.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,9 @@ public class LoginController {
 
     @PostMapping
     public String login(@RequestBody LoginDataDTO loginData){
-        return loginServiceImpl.isValid(loginData.getUsername(), loginData.getPassword())? String.join(" ", loginData.getUsername(), "login successfully.") : "login error";
+        if (loginServiceImpl.isValid(loginData.getUsername(), loginData.getPassword())) {
+return String.join(" ", loginData.getUsername(), "login successfully.");
+        }
+        throw new InvalidCredentialException("login error");
     }
 }
