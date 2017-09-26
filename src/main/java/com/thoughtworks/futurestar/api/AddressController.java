@@ -1,6 +1,7 @@
 package com.thoughtworks.futurestar.api;
 
 import com.thoughtworks.futurestar.dto.AddressDTO;
+import com.thoughtworks.futurestar.entity.Address;
 import com.thoughtworks.futurestar.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class AddressController {
     }
 
     @GetMapping("/{user_id}")
-    public List<String> getAddressList(@PathVariable String user_id) {
+    public List<Address> getAddressList(@PathVariable String user_id) {
         return addressServiceImpl.getAddressList(user_id);
     }
 }

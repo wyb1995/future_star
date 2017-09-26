@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, String>{
-    List<Address> findAllByUser(User user);
 }

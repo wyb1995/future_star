@@ -55,8 +55,6 @@ public class AddressTest {
         addressDTO = AddressDTO.builder().address("address").build();
         user = User.builder().id(UUID.randomUUID().toString()).age(20).username("username").password("password").build();
         userRepository.save(user);
-        address = Address.builder().user(user).address("address").id(UUID.randomUUID().toString()).build();
-        addressRepository.save(address);
     }
 
     @Test
@@ -68,9 +66,9 @@ public class AddressTest {
     }
 
     @Test
-    void should_return_one_address_list() throws Exception {
+    void should_return_empty_address_list() throws Exception {
         mockMvc.perform(get("/api/address/" + user.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$", hasSize(0)));
     }
 }

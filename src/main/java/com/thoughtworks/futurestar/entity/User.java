@@ -2,10 +2,8 @@ package com.thoughtworks.futurestar.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,4 +20,12 @@ public class User {
     private String username;
     private String password;
     private Integer age;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private ShoppingCart shoppingCart;
+
+    @OneToMany
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Address> addresses;
 }
