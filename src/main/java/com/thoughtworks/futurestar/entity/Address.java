@@ -15,8 +15,4 @@ public class Address {
     @Id
     private String id;
     private String address;
-
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
 }

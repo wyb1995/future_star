@@ -21,10 +21,6 @@ public class User {
     private String password;
     private Integer age;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private ShoppingCart shoppingCart;
-
     @OneToMany
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Address> addresses;
