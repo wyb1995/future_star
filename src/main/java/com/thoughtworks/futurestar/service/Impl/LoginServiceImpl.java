@@ -23,7 +23,6 @@ public class LoginServiceImpl implements LoginService {
             sessionCache.setUser(user);
             return true;
         }
-
         return false;
     }
 }

@@ -14,28 +14,27 @@ import java.util.List;
 public class UsersController {
 
     @Autowired
-    private UserService userServiceImpl;
+    private UserService userService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody User user) {
-        userServiceImpl.createAccount(user);
-        return user.getUsername() + " create successful.";
+    public User create(@RequestBody User user) {
+        return userService.create(user);
     }
 
     @GetMapping
     public Collection<User> userList() {
-        return userServiceImpl.getUserList();
+        return userService.getList();
     }
 
     @PutMapping(value = "/{id}/age/{age}")
-    public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age){
-        String userInfo = userServiceImpl.updateUserAgeById(id, age);
+    public String updateAge(@PathVariable("id") Integer id, @PathVariable("age") Integer age) {
+        String userInfo = userService.updateUserAgeById(id, age);
         return userInfo != null ? "update you info success" : "update you info error";
     }
 
     @GetMapping(params = "age")
     public List<User> findUserByAge(@RequestParam("age") Integer age) {
-        return userServiceImpl.findUserByAge(age);
+        return userService.findUserByAge(age);
     }
 }

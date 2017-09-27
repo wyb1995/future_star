@@ -5,9 +5,9 @@ import com.thoughtworks.futurestar.entity.User;
 import java.util.List;
 
 public interface UserService {
-    void createAccount(User user);
+    User create(User user);
 
-    List<User> getUserList();
+    List<User> getList();
 
     String updateUserAgeById(Integer id, Integer age);
 

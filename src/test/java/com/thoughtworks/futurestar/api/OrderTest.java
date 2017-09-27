@@ -22,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,18 +59,15 @@ public class OrderTest {
 
         item = Item.builder().id(UUID.randomUUID().toString())
                 .name("test").price("20").build();
-
         itemRepository.save(item);
 
         User user = User.builder().id(UUID.randomUUID().toString()).
-                username("username").password("password").age(20).build();
-
+                username("username").password("password").age(20).orders(Collections.EMPTY_LIST).build();
         userRepository.save(user);
 
         shoppingCartServiceImpl.addItemToShoppingCart(user.getId(), item.getId());
 
         SessionCache sessionCache = new SessionCache();
-
         sessionCache.setUser(userRepository.save(user));
     }
 

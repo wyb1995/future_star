@@ -1,6 +1,6 @@
 package com.thoughtworks.firstProject;
 
-import java.util.*;
+import java.util.List;
 
 public class Calculator {
     public static int sumEvens(List<Integer> numbers) {

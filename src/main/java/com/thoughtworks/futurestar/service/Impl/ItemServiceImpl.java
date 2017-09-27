@@ -15,13 +15,13 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
 
     @Override
-    public List<Item> getAllItem() {
+    public List<Item> getAll() {
         return itemRepository.findAll();
     }
 
     @Override
-    public void create(Item item) {
+    public Item create(Item item) {
         item.setId(UUID.randomUUID().toString());
-        itemRepository.save(item);
+        return itemRepository.save(item);
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.UUID;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -44,14 +45,13 @@ public class AddressTest {
     private SessionCache sessionCache;
 
     private AddressDTO addressDTO;
-    private User user;
 
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
 
         addressDTO = AddressDTO.builder().address("address").build();
-        user = User.builder().id(UUID.randomUUID().toString()).age(20).username("username").password("password").build();
+        User user = User.builder().id(UUID.randomUUID().toString()).age(20).username("username").password("password").addresses(Collections.EMPTY_LIST).build();
         userRepository.save(user);
         sessionCache.setUser(user);
     }

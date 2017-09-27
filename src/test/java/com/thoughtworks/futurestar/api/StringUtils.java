@@ -33,6 +33,7 @@ public final class StringUtils {
             throw new RuntimeException("Read json source error.");
         }
     }
+
     public static boolean hasText(String s) {
         return org.springframework.util.StringUtils.hasText(s);
     }

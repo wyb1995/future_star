@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public void createAccount(User user) {
+    public User create(User user) {
         user.setId(UUID.randomUUID().toString());
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
-    public List<User> getUserList() {
+    public List<User> getList() {
         return null;
     }
 

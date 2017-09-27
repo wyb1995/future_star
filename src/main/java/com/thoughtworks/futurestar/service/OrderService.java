@@ -1,12 +1,11 @@
 package com.thoughtworks.futurestar.service;
 
+import com.thoughtworks.futurestar.dto.OrderDTO;
 import com.thoughtworks.futurestar.entity.Order;
 import com.thoughtworks.futurestar.entity.User;
 
-import java.util.List;
-
 public interface OrderService {
-    Order createOrder(User user, List<String> itemIds, String address);
+    Order createOrder(User user, OrderDTO orderDTO);
 
     Order getOrder(User user, String order_id);
 }

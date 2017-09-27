@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/shopping-cart")
+@RequestMapping("/api/shopping-carts")
 public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartServiceImpl;
@@ -25,10 +25,10 @@ public class ShoppingCartController {
         return shoppingCartServiceImpl.getShoppingCart(user.getId());
     }
 
-    @PostMapping("/{item_id}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Item> addItemToShoppingCart(@PathVariable String item_id) {
+    public List<Item> addItemToShoppingCart(@RequestBody String itemId) {
         User user = sessionCache.loadCurrentUser();
-        return shoppingCartServiceImpl.addItemToShoppingCart(user.getId(), item_id);
+        return shoppingCartServiceImpl.addItemToShoppingCart(user.getId(), itemId);
     }
 }

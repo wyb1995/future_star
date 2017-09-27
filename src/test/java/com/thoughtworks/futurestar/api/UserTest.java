@@ -36,7 +36,6 @@ public class UserTest {
 
     private User user;
 
-
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
@@ -50,12 +49,12 @@ public class UserTest {
                 .content(StringUtils.writeObjectAsJsonString(user))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$", is("username create successful.")));
+                .andExpect(jsonPath("$.username", is("username")));
     }
 
     @Test
     @Disabled
-    void should_return_user_list() throws Exception{
+    void should_return_user_list() throws Exception {
         mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
@@ -64,7 +63,7 @@ public class UserTest {
 
     @Test
     @Disabled
-    void should_return_update_user_age_success() throws Exception{
+    void should_return_update_user_age_success() throws Exception {
         mockMvc.perform(put("/api/users/1/age/123"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is("update you info success")));
@@ -72,15 +71,14 @@ public class UserTest {
 
     @Test
     @Disabled
-    void should_return_update_user_age_error() throws Exception{
-//        UserService1.userDataMap.clear();
+    void should_return_update_user_age_error() throws Exception {
         mockMvc.perform(put("/api/users/1/age/123"))
                 .andExpect(jsonPath("$", is("update you info error")));
     }
 
     @Test
     @Disabled
-    void should_return_age_is_15_user_list() throws Exception{
+    void should_return_age_is_15_user_list() throws Exception {
         mockMvc.perform(get("/api/users?age=15"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

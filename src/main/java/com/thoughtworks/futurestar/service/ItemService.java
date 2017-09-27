@@ -5,9 +5,9 @@ import com.thoughtworks.futurestar.entity.Item;
 import java.util.List;
 
 public interface ItemService {
-    List<Item> getAllItem();
+    List<Item> getAll();
 
-    void create(Item item);
+    Item create(Item item);
 
 }
 

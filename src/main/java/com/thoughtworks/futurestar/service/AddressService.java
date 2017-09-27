@@ -6,7 +6,7 @@ import com.thoughtworks.futurestar.entity.Address;
 import java.util.List;
 
 public interface AddressService {
-    void createAddress(AddressDTO addressDTO, String user_id);
+    void create(AddressDTO addressDTO, String user_id);
 
-    List<Address> getAddressList(String user_id);
+    List<Address> getList(String user_id);
 }

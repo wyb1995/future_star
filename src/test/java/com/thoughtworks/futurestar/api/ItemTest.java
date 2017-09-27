@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.transaction.Transactional;
 import java.util.UUID;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -37,31 +38,31 @@ public class ItemTest {
     private ItemRepository itemRepository;
 
     private Item item;
-    private Item item1;
+    private Item anotherItem;
 
     @BeforeEach
     void setUp() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
         item = Item.builder().id(UUID.randomUUID().toString())
                 .name("test").price("20").build();
-        item1 = Item.builder().id(UUID.randomUUID().toString())
+        anotherItem = Item.builder().id(UUID.randomUUID().toString())
                 .name("test1").price("20").build();
     }
 
     @Test
-    void should_return_one_item_list() throws Exception {
-        mockMvc.perform(post("/api/item")
+    void should_create_item_successfully() throws Exception {
+        mockMvc.perform(post("/api/items")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(StringUtils.writeObjectAsJsonString(item)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name", is("test")));
     }
 
     @Test
-    void should_return_empty_item_list() throws Exception {
+    void should_return_two_item_list() throws Exception {
         itemRepository.save(item);
-        itemRepository.save(item1);
-        mockMvc.perform(get("/api/item"))
+        itemRepository.save(anotherItem);
+        mockMvc.perform(get("/api/items"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)));
     }

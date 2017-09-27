@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/address")
 public class AddressController {
     @Autowired
-    private AddressService addressServiceImpl;
+    private AddressService addressService;
 
     @Autowired
     private SessionCache sessionCache;
@@ -24,12 +24,12 @@ public class AddressController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createAddress(@RequestBody AddressDTO addressDTO) {
         User user = sessionCache.loadCurrentUser();
-        addressServiceImpl.createAddress(addressDTO, user.getId());
+        addressService.create(addressDTO, user.getId());
     }
 
     @GetMapping
     public List<Address> getAddressList() {
         User user = sessionCache.loadCurrentUser();
-        return addressServiceImpl.getAddressList(user.getId());
+        return addressService.getList(user.getId());
     }
 }

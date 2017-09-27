@@ -3,24 +3,25 @@ package com.thoughtworks.futurestar.api;
 import com.thoughtworks.futurestar.entity.Item;
 import com.thoughtworks.futurestar.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api/items")
 public class ItemController {
     @Autowired
     private ItemService itemServiceImpl;
 
     @PostMapping
-    public List<Item> createItem(@RequestBody Item item) {
-        itemServiceImpl.create(item);
-        return itemList();
+    @ResponseStatus(HttpStatus.CREATED)
+    public Item create(@RequestBody Item item) {
+        return itemServiceImpl.create(item);
     }
 
     @GetMapping
-    public List<Item> itemList(){
-        return itemServiceImpl.getAllItem().isEmpty() ? null : itemServiceImpl.getAllItem();
+    public List<Item> items() {
+        return itemServiceImpl.getAll();
     }
 }
