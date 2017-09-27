@@ -76,7 +76,7 @@ public class OrderTest {
         List<String> itemIds = new ArrayList<>();
         itemIds.add(item.getId());
         OrderDTO orderDTO = OrderDTO.builder().address("shanxi").itemIds(itemIds).build();
-        mockMvc.perform(post("/api/order")
+        mockMvc.perform(post("/api/orders")
                 .contentType(MediaType.APPLICATION_JSON).content(StringUtils.writeObjectAsJsonString(orderDTO)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.address", is("shanxi")));
