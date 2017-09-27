@@ -8,10 +8,10 @@ import com.thoughtworks.futurestar.repository.ItemRepository;
 import com.thoughtworks.futurestar.repository.OrderRepository;
 import com.thoughtworks.futurestar.repository.UserRepository;
 import com.thoughtworks.futurestar.service.OrderService;
-import com.thoughtworks.futurestar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
     private ShoppingCartServiceImpl shoppingCartServiceImpl;
 
     @Override
+    @Transactional
     public Order createOrder(User user, OrderDTO orderDTO) {
         String address = orderDTO.getAddress();
         List<String> itemIds = orderDTO.getItemIds();

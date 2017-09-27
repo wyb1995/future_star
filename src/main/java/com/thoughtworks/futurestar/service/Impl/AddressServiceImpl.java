@@ -9,6 +9,7 @@ import com.thoughtworks.futurestar.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class AddressServiceImpl implements AddressService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public void create(AddressDTO addressDTO, String user_id) {
         User user = userRepository.findOne(user_id);
 

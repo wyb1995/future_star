@@ -6,6 +6,7 @@ import com.thoughtworks.futurestar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public User create(User user) {
         user.setId(UUID.randomUUID().toString());
         return userRepository.save(user);

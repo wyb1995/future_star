@@ -10,6 +10,7 @@ import com.thoughtworks.futurestar.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +28,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public List<Item> getShoppingCart(String user_id) {
         User user = userRepository.findOne(user_id);
 
@@ -42,6 +44,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    @Transactional
     public List<Item> addItemToShoppingCart(String userId, String itemId) {
         User user = userRepository.findOne(userId);
 
@@ -66,6 +69,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    @Transactional
     public void deleteItemWithShoppingCart(String userId, List<String> itemIds) {
         ShoppingCart shoppingCart = shoppingCartRepository.findAllByUser_id(userId);
         List<Item> items = shoppingCart.getItemList().stream()
