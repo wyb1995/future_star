@@ -29,4 +29,7 @@ public class User {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Order> orders;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role")
+    private Role role;
 }
