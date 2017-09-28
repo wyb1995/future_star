@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
         return JWTUser.builder()
                 .username(username)
                 .password(user.getPassword())
-                .role("")
-                .privileges(Collections.EMPTY_LIST)
+                .role(role.getSymbol().name())
+                .privileges(role.getPrivileges().stream().map(Privilege::getSymbol).collect(Collectors.toList()))
                 .build();
     }
 }
